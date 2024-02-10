@@ -4,7 +4,12 @@ const app = express();
 const connectDB = require("./db/connect");
 
 const PORT = process.env.PORT || 5000;
+
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
+
 const products_routes = require("./routes/products");
+const user_routes = require("./routes/users");
 
 
 app.get("/", (req, res) => {
@@ -13,6 +18,7 @@ app.get("/", (req, res) => {
 
 //middleware
 app.use("/api/products", products_routes);
+app.use("/api/user", user_routes);
 
 const start = async() => {
   try {
